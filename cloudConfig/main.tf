@@ -16,13 +16,13 @@ provider "aws" {
 # primary Queue setup
 
 resource "aws_sqs_queue" "primary_dlq" {
-    name = "primary_dlq_tfname"
+    name = "primary_dlq"
     visibility_timeout_seconds = 60
     message_retention_seconds = 345600
 }
 
 resource "aws_sqs_queue" "primary_queue" {
-    name = "primary_queue_tf"
+    name = "primary_queue"
     visibility_timeout_seconds = 60
     message_retention_seconds = 345600
     
@@ -56,7 +56,7 @@ resource "aws_sqs_queue_policy" "PrimarySQSOwnerPolicy" {
 
 # SNS
 resource "aws_sns_topic" "notification_topic" {
-  name = "notificationTopic_tf"
+  name = "notificationTopic"
 }
 
 
@@ -120,7 +120,7 @@ resource "aws_iam_role_policy_attachment" "attatch_lambda_policy" {
 
 # lambda function (primary queue sqs -> sns)
 resource "aws_lambda_function" "sqs_to_sns_lambda" {
-    function_name = "SQSMessageToSNS_tf"
+    function_name = "SQSMessageToSNS"
     role = aws_iam_role.lambda_exec_role.arn
     runtime = "python3.11"
     architectures = [ "x86_64" ]
@@ -147,13 +147,13 @@ resource "aws_lambda_event_source_mapping" "primarySQS_trigger" {
 
 # emailing queue
 resource "aws_sqs_queue" "email_dlq" {
-    name = "email_dlq_tf"
+    name = "email_dlq"
     visibility_timeout_seconds = 60
     message_retention_seconds = 345600
 }
 
 resource "aws_sqs_queue" "email_queue" {
-    name = "email_queue_tf"
+    name = "email_queue"
     visibility_timeout_seconds = 60
     message_retention_seconds = 345600
     
@@ -201,13 +201,13 @@ resource "aws_sqs_queue_policy" "EmailSQSOwnerPolicy" {
 
 # whatsapp queue
 resource "aws_sqs_queue" "whatsapp_dlq" {
-    name = "whatsapp_dlq_tf"
+    name = "whatsapp_dlq"
     visibility_timeout_seconds = 60
     message_retention_seconds = 345600
 }
 
 resource "aws_sqs_queue" "whatsapp_queue" {
-    name = "whatsapp_queue_tf"
+    name = "whatsapp_queue"
     visibility_timeout_seconds = 60
     message_retention_seconds = 345600
     
@@ -254,13 +254,13 @@ resource "aws_sqs_queue_policy" "whatsappSQSOwnerPolicy" {
 
 # sms queue
 resource "aws_sqs_queue" "sms_dlq" {
-    name = "sms_dlq_tf"
+    name = "sms_dlq"
     visibility_timeout_seconds = 60
     message_retention_seconds = 345600
 }
 
 resource "aws_sqs_queue" "sms_queue" {
-    name = "sms_queue_tf"
+    name = "sms_queue"
     visibility_timeout_seconds = 60
     message_retention_seconds = 345600
     
@@ -310,7 +310,7 @@ resource "aws_sqs_queue_policy" "smsSQSOwnerPolicy" {
 
 # Dead letter queue for sns
 resource "aws_sqs_queue" "sns_dlq" {
-    name = "SNS_dlq_tf"
+    name = "SNS_dlq"
     visibility_timeout_seconds = 60
     message_retention_seconds = 345600
 }
