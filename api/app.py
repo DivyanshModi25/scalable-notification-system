@@ -9,9 +9,9 @@ import os
 app=FastAPI()
 
 # Aws client setup
-sqs:SQSClient=boto3.client('sqs')
+sqs:SQSClient=boto3.client('sqs', region_name='ap-south-1')
 # primary_queue_url="https://sqs.us-east-1.amazonaws.com/442426858328/primary-queue"
-primary_queue_url="https://sqs.us-east-1.amazonaws.com/442426858328/primary_queue"
+primary_queue_url="https://sqs.ap-south-1.amazonaws.com/442426858328/primary_queue"
 
 
 class Message(BaseModel):
